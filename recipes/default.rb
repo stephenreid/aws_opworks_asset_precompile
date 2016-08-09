@@ -5,7 +5,7 @@
 # Authored By: Stephen Reid
 ##
 
-rails_env = new_resource.environment["RAILS_ENV"]
+rails_env = ENV["RAILS_ENV"]
 Chef::Log.info("# AWS Opsworks Asset Precompile #")
 Chef::Log.info("Precompiling assets for RAILS_ENV=#{rails_env}...")
 
@@ -49,10 +49,9 @@ end
 
 execute "rake assets:precompile" do
 	cwd release_path
-	environment "RAILS_ENV" => new_resource.environment["RAILS_ENV"]
-	environment "FOG_DIRECTORY" => new_resource.environment["FOG_DIRECTORY"]
-	environment "AWS_ACCESS_KEY" => new_resource.environment["AWS_ACCESS_KEY"]
-	environment "AWS_SECRET_ACCESS_KEY" => new_resource.environment["AWS_SECRET_ACCESS_KEY"]
-	environment "RAILS_SECRET_TOKEN" => rails_secret_token
+	environment "RAILS_ENV" => ENV["RAILS_ENV"]
+	environment "FOG_DIRECTORY" => ENV"FOG_DIRECTORY"]
+	environment "AWS_ACCESS_KEY" => ENV["AWS_ACCESS_KEY"]
+	environment "AWS_SECRET_ACCESS_KEY" => ENV["AWS_SECRET_ACCESS_KEY"]
 	command "bundle exec rake assets:precompile"
 end
