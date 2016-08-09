@@ -13,7 +13,7 @@ Attributes
 
 Usage
 -----
-aws_opssworks_asset_precompile::default
+aws_opsworks_asset_precompile::default
 
 Contributing
 ------------

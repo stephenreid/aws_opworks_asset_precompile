@@ -1,4 +1,4 @@
-name             'aws_opssworks_asset_precompile'
+name             'aws_opsworks_asset_precompile'
 maintainer       'Stephen Reid'
 maintainer_email 'stephenreid@ratedsar.com'
 license          'All rights reserved'
