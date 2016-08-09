@@ -6,7 +6,7 @@
 ##
 
 rails_env = new_resource.environment["RAILS_ENV"]
-Chef::Log.info("# AWS Opsworks Asset Precompile #{=}")
+Chef::Log.info("# AWS Opsworks Asset Precompile #")
 Chef::Log.info("Precompiling assets for RAILS_ENV=#{rails_env}...")
 
 # Precompile assets. Assets are compiled into shared/assets and shared between deploys.
