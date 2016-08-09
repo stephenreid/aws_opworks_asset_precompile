@@ -50,7 +50,7 @@ end
 execute "rake assets:precompile" do
 	cwd release_path
 	environment "RAILS_ENV" => ENV["RAILS_ENV"]
-	environment "FOG_DIRECTORY" => ENV"FOG_DIRECTORY"]
+	environment "FOG_DIRECTORY" => ENV["FOG_DIRECTORY"]
 	environment "AWS_ACCESS_KEY" => ENV["AWS_ACCESS_KEY"]
 	environment "AWS_SECRET_ACCESS_KEY" => ENV["AWS_SECRET_ACCESS_KEY"]
 	command "bundle exec rake assets:precompile"
