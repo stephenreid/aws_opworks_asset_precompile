@@ -17,6 +17,7 @@ node[:deploy].each do |application, deploy|
 	resources = [
 		{ release: "public/assets", shared: "assets"},
 		{ release: "node_modules", shared: "node_modules"},
+		{ release: "client/node_modules", shared: "client/node_modules"}
 	]
 
 	resources.each do |resource|
@@ -52,9 +53,9 @@ node[:deploy].each do |application, deploy|
 	execute "rake assets:precompile" do
 		cwd release_path
 		environment "RAILS_ENV" => rails_env
-		environment "FOG_DIRECTORY" => ENV["FOG_DIRECTORY"]
-		environment "AWS_ACCESS_KEY" => ENV["AWS_ACCESS_KEY"]
-		environment "AWS_SECRET_ACCESS_KEY" => ENV["AWS_SECRET_ACCESS_KEY"]
-		command "RAILS_ENV=#{rails_env} FOG_DIRECTORY=#{ENV["FOG_DIRECTORY"]} bundle exec rake assets:precompile"
+		environment "FOG_DIRECTORY" => deploy[:environment_variables]['FOG_DIRECTORY']
+		environment "AWS_ACCESS_KEY" => deploy[:environment_variables]["AWS_ACCESS_KEY"]
+		environment "AWS_SECRET_ACCESS_KEY" => deploy[:environment_variables]["AWS_SECRET_ACCESS_KEY"]
+		command "RAILS_ENV=#{rails_env} FOG_DIRECTORY=#{deploy[:environment_variables]['FOG_DIRECTORY']} bundle exec rake assets:precompile"
 	end
 end
