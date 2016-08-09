@@ -51,10 +51,10 @@ node[:deploy].each do |application, deploy|
 
 	execute "rake assets:precompile" do
 		cwd release_path
-		environment "RAILS_ENV" => ENV["RAILS_ENV"]
+		environment "RAILS_ENV" => rails_env
 		environment "FOG_DIRECTORY" => ENV["FOG_DIRECTORY"]
 		environment "AWS_ACCESS_KEY" => ENV["AWS_ACCESS_KEY"]
 		environment "AWS_SECRET_ACCESS_KEY" => ENV["AWS_SECRET_ACCESS_KEY"]
-		command "bundle exec rake assets:precompile"
+		command "RAILS_ENV=#{rails_env} FOG_DIRECTORY=#{ENV["FOG_DIRECTORY"]} bundle exec rake assets:precompile"
 	end
 end
