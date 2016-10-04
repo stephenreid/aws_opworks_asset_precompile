@@ -37,13 +37,12 @@ node[:deploy].each do |application, deploy|
       mode 0770
       action :create
       recursive true
-      only_if { ::File.directory?("#{shared_path}/#{resource[:shared]}") }
     end
 
     # Symlink the release path to the shared path
     link "#{release_path}/#{resource[:release]}" do
       to "#{shared_path}/#{resource[:shared]}"
-      only_if { ::File.directory?("#{shared_path}/#{resource[:shared]}") }
+      only_if { ::File.directory?("#{release_path}/#{resource[:release]}") }
     end
   end
 
