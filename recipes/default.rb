@@ -42,7 +42,7 @@ node[:deploy].each do |application, deploy|
     # Symlink the release path to the shared path
     link "#{release_path}/#{resource[:release]}" do
       to "#{shared_path}/#{resource[:shared]}"
-      only_if { ::File.directory?("#{shared_path}/#{resource[:release]}") }
+      only_if { ::File.directory?("#{shared_path}/#{resource[:shared]}") }
     end
   end
 
