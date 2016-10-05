@@ -12,7 +12,7 @@ node[:deploy].each do |application, deploy|
   rails_env = deploy[:rails_env]
   Chef::Log.info("Precompiling assets for RAILS_ENV=#{rails_env}...")
   shared_path = "#{params[:path]}/shared"
-  release_path = "#{deploy[:deploy_to]}/current/"
+  release_path = "#{deploy[:deploy_to]}/current"
 
   resources = [
     { release: "public/assets", shared: "assets"},
