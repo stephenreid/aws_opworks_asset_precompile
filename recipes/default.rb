@@ -15,7 +15,9 @@ node[:deploy].each do |application, deploy|
   release_path = "#{deploy[:deploy_to]}/current/"
 
   resources = [
-    { release: "public/assets", shared: "assets" }
+    { release: "public/assets", shared: "assets"},
+    { release: "node_modules", shared: "node_modules"},
+    { release: "client/node_modules", shared: "client/node_modules"}
   ]
 
   resources.each do |resource|
@@ -40,8 +42,14 @@ node[:deploy].each do |application, deploy|
     # Symlink the release path to the shared path
     link "#{release_path}/#{resource[:release]}" do
       to "#{shared_path}/#{resource[:shared]}"
-      only_if { ::File.directory?("#{shared_path}/#{resource[:release]}") }
+      only_if { ::File.directory?("#{release_path}/#{resource[:release]}") }
     end
+  end
+
+  execute "npm install" do
+    cwd release_path
+    environment "RAILS_ENV" => rails_env
+    command "npm install --production"
   end
 
   execute "rake assets:precompile" do
