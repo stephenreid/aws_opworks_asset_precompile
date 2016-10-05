@@ -16,8 +16,7 @@ node[:deploy].each do |application, deploy|
 
   resources = [
     { release: "public/assets", shared: "assets"},
-    { release: "node_modules", shared: "node_modules"},
-    { release: "client/node_modules", shared: "client/node_modules"}
+    { release: "node_modules", shared: "node_modules"}
   ]
 
   resources.each do |resource|
