@@ -49,6 +49,7 @@ node[:deploy].each do |application, deploy|
     cwd release_path
     environment "RAILS_ENV" => rails_env
     command "npm install --production"
+    only_if 'which npm'
   end
 
   execute "rake assets:precompile" do
