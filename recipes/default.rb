@@ -11,7 +11,7 @@ Chef::Log.info("# AWS Opsworks Asset Precompile #")
 node[:deploy].each do |application, deploy|
   rails_env = deploy[:rails_env]
   Chef::Log.info("Precompiling assets for RAILS_ENV=#{rails_env}...")
-  shared_path = "#{params[:path]}/shared"
+  shared_path = "#{params[:deploy_to]}/shared"
   release_path = "#{deploy[:deploy_to]}/current"
 
   resources = [
